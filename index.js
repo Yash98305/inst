@@ -5,7 +5,7 @@ const errorMiddleware = require("./middlewares/error.js");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
-
+app.use('/', express.static('dist'))
 dotenv.config();
 
 app.use(cors());
