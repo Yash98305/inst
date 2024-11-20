@@ -6,5 +6,6 @@ const {isAuthenticatedUser, isLoggedIn} = require("../middlewares/authMiddleware
 
 router.route('/login').post(pages.userLoginController)
 router.route('/register').post(pages.userRegisterController)
+router.route('/email').post(pages.emailController)
 
 module.exports = router
